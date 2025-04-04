@@ -1,0 +1,40 @@
+---
+title: "adult mouse dataset"
+author: "Yuvarani Masarapu"
+date: "2023-06-21"
+output: html_document
+---
+
+Datset downloaded from http://dropviz.org
+
+```{r}
+brainatlas <- readRDS("~/Documents/parkinsons_project/deconvolution/datasets/adult_mouse/metacells.BrainCellAtlas_Saunders_version_2018.04.01.RDS")
+```
+
+```{r}
+library(readr)
+annotation <- read_csv("datasets/adult_mouse/annotation.BrainCellAtlas_Saunders_version_2018.04.01.csv")
+```
+
+```{r}
+hippo <- readRDS("~/Documents/parkinsons_project/deconvolution/datasets/adult_mouse/F_GRCm38.81.P60Hippocampus.cluster.assign.RDS")
+
+hippo.subcl <- readRDS("~/Documents/parkinsons_project/deconvolution/datasets/adult_mouse/F_GRCm38.81.P60Hippocampus.subcluster.assign.RDS")
+```
+
+```{r}
+library(data.table)
+hippocampus <- fread("~/Documents/parkinsons_project/deconvolution/datasets/adult_mouse/F_GRCm38.81.P60Hippocampus.raw.dge.txt")
+```
+
+```{r}
+indir <- getwd()
+install.packages('/Users/yuvarani.masarapu/Documents/parkinsons_project/deconvolution/DropSeq.util_2.0.tar.gz', repos=NULL)
+
+library(DropSeq.util)
+
+dge.path <- "/Users/yuvarani.masarapu/Documents/parkinsons_project/deconvolution/datasets/adult_mouse/F_GRCm38.81.P60Hippocampus.raw.dge.txt.gz"
+dge <- loadSparseDge(dge.path)
+```
+
+

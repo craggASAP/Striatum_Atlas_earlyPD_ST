@@ -1,0 +1,76 @@
+---
+title: "packages"
+author: "Yuvarani Masarapu"
+date: "2023-05-21"
+output: html_document
+---
+
+
+```{r}
+## for cell2location
+# on terminal, go to deconvolution folder, then the following commands one by one
+
+# export PYTHONNOUSERSITE="literallyanyletters"
+# conda create -y -n cell2loc_env python=3.9
+# export PYTHONNOUSERSITE="literallyanyletters"
+# conda activate cell2loc_env
+# pip install cell2location[tutorials]
+# export PYTHONNOUSERSITE="literallyanyletters"
+# conda activate cell2loc_env
+# conda install -c anaconda ipykernel
+# python -m ipykernel install --user --name=cell2loc_env --display-name='Environment (cell2loc_env)'
+  # < output is "Installed kernelspec cell2loc_env in /Users/yuvarani.masarapu/Library/Jupyter/kernels/cell2loc_env" >
+
+# Path is /Users/yuvarani.masarapu/miniconda3/envs/cell2loc_env for the conda environment
+```
+
+## For RCTD
+```{r}
+# install.packages("devtools")
+library(devtools)
+options(timeout = 600000000) ### set this to avoid timeout error
+devtools::install_github("dmcable/spacexr", build_vignettes = FALSE, force = TRUE)
+```
+
+# spatialDWLS
+```{r}
+library(devtools) # If not installed: install.packages('devtools')
+library(remotes)  #If not installed: install.packages('remotes')
+remotes::install_github("drieslab/Giotto@master", force = TRUE)
+
+library(Giotto)
+```
+
+# Install Endecon
+```{r}
+indir <- getwd()
+install.packages(paste(indir, "/EnDecon_0.1.0.tar.gz", sep = ""), repos = NULL, type = "source") # "path/to/download" is your personal download "EnDecon-main.zip" path
+library(EnDecon)
+```
+
+# Required packages
+```{r}
+library(Seurat)
+library(readr)
+library(dplyr)
+library(tibble)
+library(EnDecon)
+library(pryr)
+library(reticulate)
+library(philentropy)
+library(Giotto)
+library(spacexr)
+```
+
+```{r}
+# activate cell2loc_env and type which python
+# copy paste that here
+# use_condaenv(condaenv = "/Users/yuvarani.masarapu/miniconda3/envs/cell2loc_env") DID NOT use this
+
+use_python(python = "/Users/yuvarani.masarapu/miniconda3/envs/cell2loc_env/bin/python")
+
+source_python('./EnDecon/cell2location_main.py') # Had to install psutil by pip install psutil in conda environment from terminal first
+
+#EnDecon_main()
+```
+
